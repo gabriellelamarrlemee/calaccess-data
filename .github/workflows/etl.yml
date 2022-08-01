@@ -1,0 +1,8 @@
+name: Extract, transform, and load
+on:
+  workflow_dispatch:
+
+jobs:
+  etl:
+    name: "ETL"
+    runs-on: ubuntu-latest
