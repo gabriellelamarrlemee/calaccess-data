@@ -14,3 +14,6 @@ jobs:
           postgresql db: calaccess_website
           postgresql user: postgres
           postgresql password: postgres
+          
+      - name: Checkout the repo
+        uses: actions/checkout@v2
