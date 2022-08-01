@@ -6,3 +6,11 @@ jobs:
   etl:
     name: "ETL"
     runs-on: ubuntu-latest
+        
+    steps:
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '11'
+          postgresql db: calaccess_website
+          postgresql user: postgres
+          postgresql password: postgres
