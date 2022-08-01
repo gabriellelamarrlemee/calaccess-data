@@ -45,3 +45,17 @@ jobs:
         shell: bash
         env:
           PGPASSWORD: postgres
+
+      - name: Update raw and processed data
+        run: pipenv run python -W ignore manage.py updatedownloadswebsite --keep-files --noinput --verbosity=3;
+        shell: bash
+        env:
+          PGPASSWORD: postgres
+          
+      - name: Upload processed files as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: processed-data
+          path: data/processed
+          if-no-files-found: error
+          retention-days: 1
