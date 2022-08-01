@@ -17,3 +17,15 @@ jobs:
           
       - name: Checkout the repo
         uses: actions/checkout@v2
+
+      - name: Install pipenv
+        run: pipx install pipenv
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+          cache: 'pipenv'
+
+      - id: pipenv-install
+        name: Install Python dependencies
+        run: pipenv install --dev --python `which python`
