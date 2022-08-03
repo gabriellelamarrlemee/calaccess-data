@@ -56,7 +56,7 @@ jobs:
           PGPASSWORD: postgres
 
       - name: Update raw and processed data
-        run: pipenv run python -W ignore manage.py updatedownloadswebsite --keep-files --noinput --verbosity=3;
+        run: pipenv run python -W ignore manage.py updatedownloadswebsite --noinput --verbosity=3;
         shell: bash
         env:
           PGPASSWORD: postgres
