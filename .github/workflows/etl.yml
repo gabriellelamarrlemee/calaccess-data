@@ -56,14 +56,23 @@ jobs:
           PGPASSWORD: postgres
 
       - name: Update raw and processed data
-        run: pipenv run python -W ignore manage.py updatedownloadswebsite --noinput --verbosity=3;
+        run: pipenv run python -W ignore manage.py updatedownloadswebsite --keep-files --noinput --verbosity=3;
         shell: bash
         env:
           PGPASSWORD: postgres
-          
-      - name: Upload processed files as artifact
-        uses: actions/upload-artifact@v3
+
+      - uses: shallwefootball/s3-upload-action@master
+        name: Upload raw files
         with:
-          name: processed-data
-          path: data/processed
-          if-no-files-found: error
+          aws_key_id: ${{ secrets.CALACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.CALACCESS_SECRET_KEY}}
+          aws_bucket: calaccess-data
+          source_dir: 'data/csv'
+          
+      - uses: shallwefootball/s3-upload-action@master
+        name: Upload processed files
+        with:
+          aws_key_id: ${{ secrets.CALACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.CALACCESS_SECRET_KEY}}
+          aws_bucket: calaccess-data
+          source_dir: 'data/processed'
