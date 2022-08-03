@@ -60,14 +60,6 @@ jobs:
         shell: bash
         env:
           PGPASSWORD: postgres
-
-      - uses: shallwefootball/s3-upload-action@master
-        name: Upload raw files
-        with:
-          aws_key_id: ${{ secrets.CALACCESS_KEY }}
-          aws_secret_access_key: ${{ secrets.CALACCESS_SECRET_KEY}}
-          aws_bucket: calaccess-data
-          source_dir: 'data/csv'
           
       - uses: shallwefootball/s3-upload-action@master
         name: Upload processed files
@@ -76,3 +68,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.CALACCESS_SECRET_KEY}}
           aws_bucket: calaccess-data
           source_dir: 'data/processed'
+          destination_dir: 'latest'
